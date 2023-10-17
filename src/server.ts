@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import member_routes from './routes/member_routes';
 import card_routes from './routes/card_routes';
+import entry_routes from './routes/entry_routes';
 
 const app = express();
 app.use(cors());
@@ -20,6 +21,7 @@ app.get("/api", (req: Request, res: Response): void => {
 
 app.use('/api/members', member_routes);
 app.use('/api/cards', card_routes);
+app.use('/api/entries', entry_routes);
 
 
 const PORT: Number = 3000

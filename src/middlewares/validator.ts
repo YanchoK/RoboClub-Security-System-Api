@@ -41,6 +41,15 @@ const schemas = {
         cardValue:Joi.string().optional(),
         isActive:Joi.boolean().optional(),
     }),
+    entrySchema: Joi.object({
+        exitDate:Joi.date().optional(),
+        memberId:Joi.number().required()
+    }),
+    updateEntrySchema: Joi.object({
+        entryDate:Joi.date().optional(),
+        exitDate:Joi.date().optional(),
+        memberId:Joi.number().optional()
+    }),
 }
 
 const validations = {
@@ -54,7 +63,8 @@ const validations = {
     validateCard:validator(schemas.cardSchema),
     validateUpdateCard:validator(schemas.updateCardSchema),
 
-
+    validateEntry:validator(schemas.entrySchema),
+    validateUpdateEntry:validator(schemas.updateEntrySchema),
 }
 
 export default validations

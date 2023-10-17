@@ -40,7 +40,16 @@ const errorResponces = {
     },
     cardAlreadyExists: {
         message: "Card with this value already exists"
-    }
+    },
+    updateEntryError: {
+        message: "Error while updating entry",
+    },
+    entryNotFound: {
+        message: "Entry not found",
+    },
+    invalidEntryData: {
+        message: "Invalid entry data",
+    },
 }
 
 export default errorResponces;

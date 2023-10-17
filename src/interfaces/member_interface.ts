@@ -1,4 +1,3 @@
-// import { Ticket } from "./ticket_interface"
 
 export interface Member {
   id?: number;
