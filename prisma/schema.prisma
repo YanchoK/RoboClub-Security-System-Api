@@ -25,7 +25,7 @@ model Member {
 
 model Card {
   id        Int    @id @default(autoincrement())
-  cardValue String
+  cardValue String @unique
   isActive Boolean @default(false)
 
   member Member?

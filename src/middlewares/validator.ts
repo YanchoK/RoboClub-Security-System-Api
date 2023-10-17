@@ -21,7 +21,8 @@ const schemas = {
         firstName: Joi.string().required(),
         lastName: Joi.string().required(),
         password: Joi.string().min(6).max(30).required(),
-        role: Joi.string().valid(...Object.values(MemberRole)).required()
+        role: Joi.string().valid(...Object.values(MemberRole)).required(),
+        cardId: Joi.number().optional()
     }),
     updateMemberSchema: Joi.object({
         email: Joi.string().email().optional(),
@@ -29,15 +30,30 @@ const schemas = {
         lastName: Joi.string().optional(),
         password: Joi.string().min(6).max(30).optional(),
         profileImageName: Joi.string().optional(),
-        role: Joi.string().valid(...Object.values(MemberRole)).optional()
+        role: Joi.string().valid(...Object.values(MemberRole)).optional(),
+        cardId: Joi.number().optional()
+    }),
+    cardSchema: Joi.object({
+        cardValue:Joi.string().required(),
+        isActive:Joi.boolean().required()
+    }),
+    updateCardSchema: Joi.object({
+        cardValue:Joi.string().optional(),
+        isActive:Joi.boolean().optional(),
     }),
 }
 
 const validations = {
     validateLogIn: validator(schemas.logInSchema),
+
     validateId: validator(schemas.idSchema),
+
     validateMember: validator(schemas.memberSchema),
     validateUpdateMember: validator(schemas.updateMemberSchema),
+
+    validateCard:validator(schemas.cardSchema),
+    validateUpdateCard:validator(schemas.updateCardSchema),
+
 
 }
 

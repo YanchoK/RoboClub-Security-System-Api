@@ -8,23 +8,23 @@ const errorResponces = {
     memberNotFound: {
         message: "Member not found",
     },
-    ticketNotFound: {
-        message: "Ticket not found",
+    cardNotFound: {
+        message: "Card not found",
     },
     invalidMemberData: {
         message: "Invalid Member data",
     },
-    invalidTicketData: {
-        message: "Invalid ticket data",
+    invalidCardData: {
+        message: "Invalid card data",
     },
-    createTicketError: {
-        message: "Error while creating a new ticket",
+    createCardError: {
+        message: "Error while creating a new card",
     },
     updateMemberError: {
         message: "Error while updating Member",
     },
-    updateTicketError: {
-        message: "Error while updating ticket",
+    updateCardError: {
+        message: "Error while updating card",
     },
     deleteMemberError: {
         message: "Error while deleting member",
@@ -37,6 +37,9 @@ const errorResponces = {
     },
     memberAlreadyExists: {
         message: "Member with this email already exists"
+    },
+    cardAlreadyExists: {
+        message: "Card with this value already exists"
     }
 }
 

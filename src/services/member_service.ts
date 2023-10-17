@@ -11,7 +11,7 @@ const MemberService = {
             return await prisma.member.findMany() as Member[]
         } catch (error) {
             console.error("Error in getAllMembersInRange:", error);
-            throw new Error("Error while getting users");
+            throw new Error("Error while getting members");
         }
     },
 
@@ -23,22 +23,22 @@ const MemberService = {
             });
 
             if (allMembersInRange.length === 0) {
-                const usersCount = await prisma.member.count()
-                throw { status: 500, message: `Number of elements exieded! Elements count: ${usersCount}.` };
+                const membersCount = await prisma.member.count()
+                throw { status: 500, message: `Number of elements exieded! Elements count: ${membersCount}.` };
             }
 
             return allMembersInRange as Member[];
         } catch (error) {
             console.error("Error in getAllMembersInRange:", error);
-            throw new Error("Error while getting users");
+            throw new Error("Error while getting members");
         }
     },
 
-    async getMemberById(userId: number) {
+    async getMemberById(memberId: number) {
         try {
             const member = await prisma.member.findFirst({
                 where: {
-                    id: userId
+                    id: memberId
                 }
             });
 
@@ -49,11 +49,11 @@ const MemberService = {
         }
     },
 
-    async getMemberByEmail(userEmail: string) {
+    async getMemberByEmail(memberEmail: string) {
         try {
             const member = await prisma.member.findUnique({
                 where: {
-                    email: userEmail
+                    email: memberEmail
                 }
             });
 
@@ -68,12 +68,12 @@ const MemberService = {
         // const { firstName, lastName,fullName, email, passwordHash, role } = newMember;
 
         try {
-            let { passwordHash, ...userWithoutPassword } = newMember;
+            let { passwordHash, ...memberWithoutPassword } = newMember;
             passwordHash = await bcrypt.hash(passwordHash, 10);
 
 
             const createdMember = await prisma.member.create({
-                data: { ...userWithoutPassword, passwordHash: passwordHash }
+                data: { ...memberWithoutPassword, passwordHash: passwordHash }
             })
 
             delete (createdMember as any).passwordHash;
@@ -85,11 +85,11 @@ const MemberService = {
         }
     },
 
-    async updateMember(userId: number, changedMember: Member) {
+    async updateMember(memberId: number, changedMember: Member) {
         try {
             const updatedMember = await prisma.member.update({
                 where: {
-                    id: userId
+                    id: memberId
                 },
                 data: {
                     ...changedMember
@@ -103,11 +103,11 @@ const MemberService = {
         }
     },
 
-    async deleteMember(userId: number) {
+    async deleteMember(memberId: number) {
         try {
             await prisma.member.delete({
                 where: {
-                    id: userId
+                    id: memberId
                 }
             })
         } catch (error: any) {
