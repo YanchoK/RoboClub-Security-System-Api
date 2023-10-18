@@ -66,6 +66,7 @@ const MemberController = {
                 const newMember: Member = {
                     firstName: firstName,
                     lastName: lastName,
+                    fullName: firstName + " " + lastName,
                     email: email,
                     passwordHash: password,
                     role: role,
@@ -101,7 +102,7 @@ const MemberController = {
         }
 
         validation = validator.validateId(req.params)
-        let {id} = validation.value
+        let { id } = validation.value
 
         if (validation.error) {
             console.log(validation.error);
@@ -116,9 +117,12 @@ const MemberController = {
             }
 
             if (changedMember.password) {
-                changedMember.passwordHash= await bcrypt.hash(changedMember.password, 10);
+                changedMember.passwordHash = await bcrypt.hash(changedMember.password, 10);
                 delete changedMember.password
             }
+
+            const fullName = `${changedMember.firstName ? changedMember.firstName : member.firstName} ${changedMember.lastName ? changedMember.lastName : member.lastName}`
+            changedMember.fullName = fullName
 
             const updatedMember = await memberService.updateMember(id, changedMember)
             res.status(200).json({ message: "Member is updated", data: updatedMember });
